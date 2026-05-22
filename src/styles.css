@@ -1,0 +1,862 @@
+/* ==========================================================================
+   1. SETTINGS & VARIABLES
+   ========================================================================== */
+:root {
+    --primary: #1a1a1a;
+    --accent: #c0a080;
+    --bg: #faf9f6;
+    --white: #ffffff;
+    --text-muted: #666666;
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --container-width: 1200px;
+}
+
+/* ==========================================================================
+   2. GLOBAL RESET
+   ========================================================================== */
+*, *::before, *::after { 
+  box-sizing: border-box; 
+}
+
+body { 
+    margin: 0; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    background-color: var(--bg); 
+    color: var(--primary); 
+    line-height: 1.6;
+    overflow-x: hidden; 
+    -webkit-font-smoothing: antialiased;
+}
+
+a { 
+  text-decoration: none; 
+  color: inherit; transition: 
+  var(--transition); 
+}
+
+img { 
+  max-width: 100%; 
+  display: block; 
+  object-fit: cover; 
+}
+
+/* ==========================================================================
+   3. REUSABLE COMPONENTS
+   ========================================================================== */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section-padding { 
+  padding: 120px 0; 
+  border-bottom: 1px solid rgba(0,0,0,0.05); 
+}
+
+.section-header { 
+  text-align: center; 
+  margin-bottom: 60px; 
+}
+
+.section-header h2 { 
+  font-size: 2.5rem; 
+  margin-bottom: 10px; 
+}
+
+.section-header p { 
+  color: var(--text-muted); 
+}
+
+.subtitle {
+    display: block; 
+    color: var(--accent); 
+    font-weight: 700;
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    font-size: 0.8rem; 
+    margin-bottom: 10px;
+}
+
+.tag {
+    display: inline-block; 
+    font-size: 0.7rem; 
+    font-weight: 700;
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    color: var(--accent);
+    margin-top: 15px; 
+    padding: 4px 12px; 
+    border: 1px solid var(--accent); 
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   4. NAVIGATION
+   ========================================================================== */
+#main-nav {
+    position: fixed;
+    width: 100%;
+    padding: 30px 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    background: transparent;
+}
+
+#main-nav.scrolled {
+    padding: 15px 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+#main-nav.scrolled .logo-img {
+    height: 40px;
+    filter: none; 
+}
+
+#main-nav.scrolled .nav-item{
+    color: #1a1a1a;
+}
+
+#main-nav.scrolled .nav-item:hover,
+#main-nav.scrolled {
+    color: var(--accent);
+}
+
+.nav-wrapper {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+}
+
+.btn-contact-us {
+    background-color: transparent;
+    color: #ffffff;
+    right: 100px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid #ffffff;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+#main-nav.scrolled .btn-contact-us {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-contact-us:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff !important; /* Memaksa teks tetap putih saat di-hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(192, 160, 128, 0.4);
+}
+
+.nav-contact-btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#main-nav .logo a, 
+#main-nav .nav-item {
+    color: #ffffff;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    transition: all 0.4s ease;
+    filter: brightness(0) invert(1); 
+}
+
+nav.scrolled .logo-img {
+    height: 40px; 
+    filter: none; 
+    background-color: var(--primary);
+}
+
+.nav-links { 
+  display: flex; 
+  gap: 40px; 
+  list-style: none; 
+  margin: 0; 
+  padding: 0; 
+  justify-content: center; 
+}
+
+.nav-item, .nav-socials a {
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+}
+
+.nav-item {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    transition: var(--transition);
+}
+
+.nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.nav-item:hover::after { 
+  width: 100%; 
+}
+
+.nav-item:hover { 
+  color: var(--white); 
+}
+
+nav.scrolled .nav-item:hover { 
+  color: var(--accent); 
+}
+
+/* ==========================================================================
+   5. HERO SECTION
+   ========================================================================== */
+.hero { 
+    height: 100vh; 
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    color: var(--white); 
+    overflow: hidden;
+}
+.hero video { 
+  position: absolute; 
+  inset: 0; 
+  width: 100%; 
+  height: 100%; 
+  z-index: -2; 
+  object-fit: cover; 
+}
+
+.overlay { 
+  position: absolute; 
+  inset: 0; 
+  z-index: -1; 
+  background: linear-gradient(to right, rgba(0,0,0,0.6) 20%, transparent 80%); 
+}
+
+.hero h1 { 
+  font-size: clamp(2.5rem, 8vw, 5rem); 
+  line-height: 1.1; 
+  margin-bottom: 20px; 
+}
+
+.hero h1 span { 
+  color: black; 
+}
+
+.hero p { 
+  max-width: 500px; 
+  font-size: 1.1rem; 
+  margin: 0 auto 30px; 
+  opacity: 0.9; 
+}
+.btn { 
+  padding: 14px 32px; 
+  border-radius: 50px; 
+  font-weight: 600; 
+  display: inline-block; 
+  border: none; 
+  cursor: pointer; 
+  text-align: center; 
+  transition: var(--transition); 
+}
+.btn-primary { 
+  background: var(--white); 
+  color: var(--primary); 
+}
+.btn-primary:hover { 
+  background: var(--accent); 
+  color: var(--white); 
+  transform: translateY(-3px); 
+  box-shadow: 0 10px 20px rgba(192, 160, 128, 0.3); 
+}
+
+/* ==========================================================================
+   6. PRODUCT SECTION
+   ========================================================================== */
+.category-wrapper {
+    margin-bottom: 80px;
+}
+
+.category-title {
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+    padding-left: 10px;
+    border-left: 4px solid var(--accent);
+}
+
+/* Grid dipaksa menjadi 3 kolom */
+.product-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); /* Tetap 3 kolom */
+    gap: 40px; /* Spacing antar card diperlebar agar elegan */
+}
+
+.product-card { 
+    background: transparent; /* Hilangkan bg agar menyatu dengan desain showcase */
+    transition: var(--transition); 
+}
+
+.product-card img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    transition: var(--transition); 
+}
+.img-container { 
+    width: 100%; 
+    aspect-ratio: 1 / 1; 
+    overflow: hidden; 
+    border-radius: 12px; 
+    
+    /* Latar belakang profesional: Abu-abu sangat muda/Putih tulang */
+    background-color: #F7F7F7; 
+    
+    /* Memberikan jarak agar gambar mengecil di tengah (Clean Look) */
+    padding: 40px; 
+    
+    /* Layout untuk memastikan gambar tepat di tengah */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Garis tepi tipis untuk definisi (Optional) */
+    border: 1px solid rgba(0,0,0,0.03);
+    
+    transition: var(--transition);
+}
+
+.img-container img { 
+    max-width: 100%; 
+    max-height: 100%; 
+    width: auto;
+    height: auto;
+    
+    /* Memastikan seluruh objek produk terlihat tanpa terpotong */
+    object-fit: contain; 
+    
+    /* Shadow halus pada gambar produk agar terlihat 3D (Premium Touch) */
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+    
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Interaksi Hover */
+.product-card:hover .img-container {
+    background-color: #EDEDED; /* Berubah sedikit lebih gelap saat hover */
+}
+
+.product-card:hover img {
+    transform: scale(1.1) translateY(-5px);
+}
+
+/* Spacing Spesifik untuk Teks (h3, p, price) */
+.product-card h3 { 
+    padding-top: 10px;
+    font-size: 1.4rem; 
+    margin: 0 0 15px 0; /* Jarak bawah Judul */
+    line-height: 1.2;
+}
+
+.product-card p { 
+    color: var(--text-muted); 
+    font-size: 0.95rem;
+    margin: 0 0 20px 0; /* Jarak bawah Paragraf */
+    min-height: 50px; /* Menjaga agar tinggi teks seragam */
+}
+
+.price { 
+    font-weight: 700; 
+    color: var(--accent); 
+    font-size: 1.25rem; 
+    display: block; 
+    margin-top: auto; /* Mendorong harga ke bawah jika teks deskripsi pendek */
+}
+
+/* ==========================================================================
+   7. ABOUT SECTION
+   ========================================================================== */
+.about-wrapper { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 80px; 
+  align-items: center; 
+}
+
+.about-image-stack { 
+  position: relative; 
+  padding-bottom: 40px; 
+}
+
+.about-image-stack .img-main { 
+  width: 100%; 
+  height: auto; 
+  border-radius: 12px; 
+  z-index: 2; 
+  position: relative; 
+}
+
+.img-accent-box { 
+  position: absolute; 
+  width: 80%; 
+  height: 80%; 
+  border: 2px solid var(--accent); 
+  bottom: 0; 
+  right: -20px; 
+  z-index: 1; 
+}
+
+.about-text h2 { 
+  font-size: 2.5rem; 
+  line-height: 1.1; 
+  margin-bottom: 25px; 
+}
+
+.about-text .lead { 
+  font-size: 1.1rem; 
+  color: var(--primary); 
+  font-weight: 600; 
+  margin-bottom: 20px; 
+}
+
+.about-stats { 
+  display: flex; 
+  gap: 40px; 
+  margin-top: 40px; 
+  padding-top: 30px; 
+  border-top: 1px solid #eee; 
+}
+
+.stat-item strong { 
+  display: block; 
+  font-size: 2rem; 
+  color: var(--primary);
+}
+
+.stat-item span { 
+  font-size: 0.85rem; 
+  color: var(--text-muted); 
+}
+
+/* ==========================================================================
+   8. JOURNAL SECTION
+   ========================================================================== */
+.blog-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 50px; /* Jarak antar artikel diperlebar agar tidak sesak */
+}
+
+.blog-card { 
+    background: transparent; /* Menghilangkan background agar terlihat lebih clean */
+    border-radius: 0; /* Menggunakan gaya tajam/minimalis sering terlihat lebih premium */
+    overflow: hidden; 
+    transition: var(--transition); 
+}
+
+/* Container Gambar */
+.blog-img { 
+    position: relative; 
+    overflow: hidden; 
+    margin-bottom: 30px; /* Spacing lebih besar ke area teks */
+    border-radius: 8px; /* Border radius halus hanya pada gambar */
+}
+
+.blog-img img { 
+    width: 100%; 
+    height: 280px; /* Gambar dibuat sedikit lebih tinggi */
+    object-fit: cover; 
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.blog-card:hover .blog-img img { 
+    transform: scale(1.08); /* Zoom halus saat hover */
+}
+
+/* Badge Tanggal */
+.blog-date { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    background: var(--primary); 
+    color: var(--white); 
+    padding: 10px 18px; 
+    font-size: 0.7rem; 
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Area Informasi Teks */
+.blog-info {
+    padding: 0 5px; /* Memberikan sedikit offset agar teks tidak menempel ke tepi container */
+}
+
+.category { 
+    color: var(--accent); 
+    font-weight: 700; 
+    font-size: 0.75rem; 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+    display: block; 
+    margin-bottom: 15px; /* Jarak ke judul */
+}
+
+/* Perbaikan Spacing Judul (H3) */
+.blog-info h3 { 
+    font-size: 1.5rem; 
+    margin-bottom: 20px; /* Spacing lebih lega ke paragraf */
+    line-height: 1.25; 
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Perbaikan Spacing Paragraf */
+.blog-info p { 
+    color: var(--text-muted); 
+    font-size: 1rem; 
+    line-height: 1.6;
+    margin-bottom: 30px; /* Spacing lebih lega ke tombol Read More */
+    display: -webkit-box; 
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical; 
+    overflow: hidden; 
+}
+
+/* Read More / See More Styling */
+.read-more { 
+    font-weight: 700; 
+    font-size: 0.85rem; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary);
+    border-bottom: 2px solid var(--accent); /* Memberikan aksen garis bawah sebagai ganti button kaku */
+    padding-bottom: 5px;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.read-more:hover {
+    color: var(--accent);
+    border-color: var(--primary);
+}
+
+/* ==========================================================================
+   9. FOOTER
+   ========================================================================== */
+footer { 
+  background: #111; 
+  color: #fff; 
+  padding: 80px 0 20px; 
+}
+
+.footer-content { 
+  display: flex; 
+  justify-content: space-between; 
+  flex-wrap: wrap; 
+  gap: 40px; 
+  padding-bottom: 40px; 
+}
+
+.footer-brand { 
+  max-width: 300px; 
+}
+
+.footer-brand p { 
+  margin-top: 20px; 
+  color: #888; 
+}
+
+.footer-info { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 60px; 
+}
+
+.footer-col h4 { 
+  margin-bottom: 20px; 
+  font-size: 0.9rem; 
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+}
+
+.footer-col a { 
+  display: block; 
+  color: #888; 
+  margin-bottom: 10px; 
+  font-size: 0.9rem; 
+}
+
+.footer-col a:hover { 
+  color: var(--accent); 
+}
+
+.footer-bottom { 
+  border-top: 1px solid rgba(255,255,255,0.05); 
+  padding: 20px 0; 
+  text-align: center; 
+  font-size: 0.8rem; 
+  color: #555; 
+}
+
+/* ==========================================================================
+   10. ARTICLE DETAIL PAGE STYLES
+   ========================================================================== */
+.article-detail-page {
+    background-color: #ffffff; /* Latar belakang artikel dibuat putih bersih agar fokus membaca */
+}
+
+.article-container {
+    max-width: 800px; /* Lebar membaca yang ideal agar mata tidak lelah */
+    padding-top: 140px; /* Jarak aman dari fixed navigation bar */
+    padding-bottom: 80px;
+}
+
+/* Tombol Kembali */
+.back-to-journal {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    transition: var(--transition);
+}
+
+.back-to-journal:hover {
+    color: var(--accent);
+    transform: translateX(-5px);
+}
+
+/* Header Artikel */
+.article-header h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.2;
+    margin: 15px 0 20px 0;
+    color: var(--primary);
+}
+
+.article-meta {
+    display: flex;
+    gap: 20px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding-bottom: 15px;
+}
+
+.article-meta i {
+    color: var(--accent);
+    margin-right: 4px;
+}
+
+/* Gambar Utama Artikel */
+.article-hero-img {
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+.article-hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Isi Konten Tulisan */
+.article-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333333;
+}
+
+.article-body p {
+    margin-bottom: 25px;
+}
+
+.article-body p.lead {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.6;
+}
+
+.article-body h2 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin: 40px 0 20px 0;
+}
+
+/* Blockquote / Kutipan Premium */
+.article-body blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 10px 0 10px 25px;
+    margin: 40px 0;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--primary);
+    background-color: #faf9f6;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Daftar List */
+.article-body ul {
+    margin-bottom: 30px;
+    padding-left: 20px;
+}
+
+.article-body li {
+    margin-bottom: 12px;
+}
+
+/* Penyesuaian Responsif Layar HP */
+@media (max-width: 768px) {
+    .article-container {
+        padding-top: 180px; /* Memberi ruang untuk navbar vertikal HP */
+    }
+}
+
+/* ==========================================================================
+   11. ANIMATIONS & RESPONSIVE
+   ========================================================================== */
+.reveal-hidden { 
+  opacity: 0; 
+  transform: translateY(30px); 
+  transition: all 0.8s var(--transition); 
+}
+
+.reveal-hidden.active { 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+@media (max-width: 1100px) {
+    .nav-wrapper {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .nav-links {
+        display: flex !important;
+        justify-content: center;
+        gap: 20px; 
+    }
+
+    .nav-contact-btn-wrapper {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .btn-contact-us {
+        padding: 8px 18px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 992px) {
+    .about-wrapper { 
+      grid-template-columns: 1fr; 
+      gap: 50px; 
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-text h2 { 
+      font-size: 2rem; 
+    }
+
+    .about-image-stack .img-main { 
+      height: auto; 
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    } 
+
+    .nav-contact-btn-wrapper {
+        margin-left: auto;
+    }
+
+    .btn-contact-us {
+        padding: 8px 16px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex !important; 
+      justify-content: center;
+      gap: 20px;
+      grid-column: 2; /* Menaruh menu di baris kedua */
+    }
+
+    .section-padding { 
+        padding: 60px 0; 
+    }
+
+    .hero { 
+        text-align: center; 
+        justify-content: center; 
+    }
+
+    .hero p { 
+        margin: 0 auto 30px; 
+        max-width: 90%; 
+    }
+    
+    .footer-info { 
+        gap: 30px; 
+    }
+}
+
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
